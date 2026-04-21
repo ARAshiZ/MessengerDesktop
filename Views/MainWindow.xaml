@@ -4,13 +4,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerDesktop.Views"
+        xmlns:vm="clr-namespace:MessengerDesktop.ViewModels"
+        xmlns:models="clr-namespace:MessengerDesktop.Models"
         mc:Ignorable="d"
-        Title="Messenger" Height="900" Width="1400"
+        Title="Messenger" Height="800" Width="1200"
         WindowStartupLocation="CenterScreen">
+
+    <d:Window.DataContext>
+        <vm:MainViewModel/>
+    </d:Window.DataContext>
+
+
+
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="11*"/>
         </Grid.ColumnDefinitions>
+        <ListBox 
+            Background="#1c1c1c" 
+            ItemsSource="{Binding UserList}"
+            Padding="0,0,0,0"
+            Width="300"
+            HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:ChatUserModel}">
+                    <local:UserChatTemplate/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
