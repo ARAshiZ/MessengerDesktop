@@ -22,5 +22,12 @@ namespace MessengerDesktop.Views
             InitializeComponent();
             this.DataContext = new MainViewModel();
         }
+
+        private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+            var textbox = sender as TextBox;
+            textbox.SelectionLength = 0;
+        }
     }
 }
