@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace MessengerDesktop.ViewModels
 {
@@ -16,17 +17,24 @@ namespace MessengerDesktop.ViewModels
     {
 
         #region Fields
-
+        private object choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
         #endregion
 
         #region Properties
         [ObservableProperty]
         private ObservableCollection<ChatUserModel> _userList = new();
+
+        [ObservableProperty]
+        private object _dialogPanel;
+
+        [ObservableProperty]
+        private ChatUserModel _selectUserDialog;
         #endregion
 
         #region Constructor
         public MainViewModel() 
-        { 
+        {
+            DialogPanel = new ChoiceDialogPlaceholder_VM();
             UserModel user1 = new UserModel();
             user1.Id = 0;
             user1.Name = "TestUser1";
@@ -45,7 +53,10 @@ namespace MessengerDesktop.ViewModels
         #endregion
 
         #region Methods
-
+        partial void OnSelectUserDialogChanged(ChatUserModel chatUserModel)
+        {
+            DialogPanel = new DialogPanel_VM(chatUserModel);
+        }
         #endregion
     }
 }

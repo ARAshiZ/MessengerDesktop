@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="MessengerDesktop.Views.DialogPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MessengerDesktop.Views"
+             xmlns:vm="clr-namespace:MessengerDesktop.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+        <DockPanel LastChildFill="True" Background="#1c1c1c">
+            <Border BorderThickness="0" 
+                        DockPanel.Dock="Top" 
+                        Height="70"
+                        HorizontalAlignment="Stretch">
+                <Label Foreground="White"
+                           FontSize="16" 
+                           Content="{Binding UserName}"  
+                           Height="50"
+                           HorizontalAlignment="Left"
+                           HorizontalContentAlignment="Left"/>
+            </Border>
+            
+            <Border Background="#1c1c1c"
+                        DockPanel.Dock="Bottom"
+                        BorderThickness="0" 
+                        Height="70"
+                        HorizontalAlignment="Left"
+                        Padding="0,0,0,0">
+                <TextBox FontSize="16"
+                            TextAlignment="Left" 
+                            Foreground="white"
+                            Background="#1c1c1c"
+                            BorderThickness="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            TextWrapping="Wrap"
+                            Text="{Binding MessageText}" 
+                            Height="20"
+                            Width="750"/>
+            </Border>
+            <ListBox BorderThickness="0" HorizontalAlignment="Stretch" Background="#454545" Foreground="White"/>
+        </DockPanel>
+    </Grid>
+</UserControl>
