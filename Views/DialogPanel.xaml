@@ -7,6 +7,11 @@
              xmlns:vm="clr-namespace:MessengerDesktop.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
         <DockPanel LastChildFill="True" Background="#1c1c1c">
@@ -28,10 +33,23 @@
                         Height="70"
                         HorizontalAlignment="Left"
                         Padding="0,0,0,0">
-                <TextBox FontSize="16"
+                <Grid Margin="10,0,0,0" Background="#1c1c1c">
+                    <TextBlock FontSize="16"
+                            TextAlignment="Left" 
+                            Foreground="Gray"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            TextWrapping="Wrap"
+                            Text="Введите сообщение..." 
+                            Height="20"
+                            Width="750"
+                            Visibility="{Binding ElementName=EnterBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" IsHitTestVisible="False"/>
+
+                    <TextBox Name="EnterBox"
+                            FontSize="16"
                             TextAlignment="Left" 
                             Foreground="white"
-                            Background="#1c1c1c"
+                            Background="Transparent"
                             BorderThickness="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
@@ -39,8 +57,9 @@
                             Text="{Binding MessageText}" 
                             Height="20"
                             Width="750"/>
+                </Grid>
             </Border>
-            <ListBox BorderThickness="0" HorizontalAlignment="Stretch" Background="#454545" Foreground="White"/>
+            <ListView ItemsSource="{Binding Messages}" FontSize="24" BorderThickness="0" HorizontalAlignment="Stretch" Background="#454545" Foreground="White"/>
         </DockPanel>
     </Grid>
 </UserControl>

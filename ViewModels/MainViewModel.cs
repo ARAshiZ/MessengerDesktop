@@ -34,7 +34,7 @@ namespace MessengerDesktop.ViewModels
         #region Constructor
         public MainViewModel() 
         {
-            DialogPanel = new ChoiceDialogPlaceholder_VM();
+            DialogPanel = choiceDialogPlaceholder_VM;
             UserModel user1 = new UserModel();
             user1.Id = 0;
             user1.Name = "TestUser1";
@@ -44,9 +44,11 @@ namespace MessengerDesktop.ViewModels
             ChatUserModel chatUser1 = new ChatUserModel();
             ChatUserModel chatUser2 = new ChatUserModel();
             chatUser1.User = user1;
-            chatUser1.LastMessage = "Hello!";
+            chatUser1.Messages = new ObservableCollection<string>() {"hello", "hi"};
+            chatUser1.LastMessage = chatUser1.Messages.Last();
             chatUser2.User = user2;
-            chatUser2.LastMessage = "Bye.";
+            chatUser2.Messages = new ObservableCollection<string>() { "Good night.", "Bye." };
+            chatUser2.LastMessage = chatUser2.Messages.Last();
             UserList.Add(chatUser1);
             UserList.Add(chatUser2);
         }
