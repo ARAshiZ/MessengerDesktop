@@ -10,7 +10,7 @@ namespace MessengerDesktop.Models
     public class ChatUserModel 
     {
         public UserModel User { get; set; }
-        public ObservableCollection<string> Messages { get; set; }
-        public string LastMessage { get; set; }
+        public ObservableCollection<MessageModel> Messages { get; set; }
+        public MessageModel LastMessage { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MessengerDesktop.Views.ChoiceDialogPlaceholder"
+﻿<UserControl x:Class="MessengerDesktop.Views.DialogPlaceholder"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,18 +9,20 @@
     <Border Grid.Column="1"
         Background="{StaticResource MainBackgroundColor}">
         <Border Background="{StaticResource SomePanelColor}" 
-            BorderBrush="{StaticResource SomePanelColor}" 
-            BorderThickness="1" 
-            CornerRadius="15" 
-            Width="350" 
-            Height="35">
+        BorderBrush="{StaticResource SomePanelColor}" 
+        BorderThickness="1" 
+        CornerRadius="15" 
+        Width="350" 
+        Height="35"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
             <Label Padding="0,0,0,0"
-               Width="330" 
-               Height="25"
-               Content="Выберите контакт для отправки сообщения"
-               FontSize="16"
-               Foreground="{StaticResource MainTextColor}"
-               HorizontalContentAlignment="Center"/>
+           Width="330" 
+           Height="25"
+           Content="Выберите контакт для отправки сообщения"
+           FontSize="16"
+           Foreground="{StaticResource MainTextColor}"
+           HorizontalContentAlignment="Center"/>
 
         </Border>
     </Border>

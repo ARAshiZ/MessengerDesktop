@@ -18,7 +18,7 @@ namespace MessengerDesktop.ViewModels
         private string _userName = string.Empty;
 
         [ObservableProperty]
-        private ObservableCollection<string> _messages = new();
+        private ObservableCollection<MessageModel> _messages = new();
 
         public DialogPanel_VM(ChatUserModel chatUserModel)
         {

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MessengerDesktop.Views
 {
     /// <summary>
-    /// Логика взаимодействия для DialogMessagePanel.xaml
+    /// Логика взаимодействия для DialogPlaceholder.xaml
     /// </summary>
-    public partial class DialogMessagePanel : UserControl
+    public partial class DialogPlaceholder : UserControl
     {
-        public DialogMessagePanel()
+        public DialogPlaceholder()
         {
             InitializeComponent();
         }

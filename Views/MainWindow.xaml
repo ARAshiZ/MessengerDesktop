@@ -25,14 +25,21 @@
         </DataTemplate>
     </Window.Resources>
 
-    <DockPanel LastChildFill="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <ListBox 
-            Background="#1c1c1c"
-            BorderThickness="0"
-            ItemsSource="{Binding UserList}"
-            SelectedItem="{Binding SelectUserDialog}"
-            Padding="0,0,0,0"
-            HorizontalContentAlignment="Stretch" HorizontalAlignment="Right" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" MinWidth="200" MaxWidth="400"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*" MinWidth="800"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox Grid.Column="0"
+             Background="{StaticResource MainBackgroundColor}"
+             BorderThickness="0"
+             ItemsSource="{Binding UserList}"
+             SelectedItem="{Binding SelectUserDialog}"
+             Padding="0,0,0,0"
+             HorizontalContentAlignment="Stretch">
+
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
@@ -44,15 +51,24 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
+
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:ChatUserModel}">
                     <local:UserChatTemplate/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ContentControl 
-            Grid.Column="1" 
-            Content="{Binding DialogPanel}"
-            VerticalContentAlignment="Stretch"/>
-    </DockPanel>
+
+        <GridSplitter Grid.Column="1"
+                  Width="1"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Background="{StaticResource SecondBackgroundColor}"
+                  ResizeDirection="Columns"
+                  ShowsPreview="True"/>
+
+        <ContentControl Grid.Column="2"
+                    Content="{Binding DialogPanel}"
+                    VerticalContentAlignment="Stretch"/>
+    </Grid>
 </Window>

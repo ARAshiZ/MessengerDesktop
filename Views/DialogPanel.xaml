@@ -5,35 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MessengerDesktop.Views"
              xmlns:vm="clr-namespace:MessengerDesktop.ViewModels"
+             xmlns:models="clr-namespace:MessengerDesktop.Models"
+             xmlns:converter="clr-namespace:MessengerDesktop.Views.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <converter:MessageHorizontalAligmentConverter x:Key="MessageAligmentConverter"/>
     </UserControl.Resources>
     
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-        <DockPanel LastChildFill="True" Background="#1c1c1c">
+        <DockPanel LastChildFill="True" Background="{StaticResource MainBackgroundColor}">
             <Border BorderThickness="0" 
                         DockPanel.Dock="Top" 
                         Height="70"
                         HorizontalAlignment="Stretch">
-                <Label Foreground="White"
+                <Label Foreground="{StaticResource MainTextColor}"
                            FontSize="16" 
                            Content="{Binding UserName}"  
                            Height="50"
                            HorizontalAlignment="Left"
                            HorizontalContentAlignment="Left"/>
             </Border>
-            
-            <Border Background="#1c1c1c"
+
+            <Border Background="{StaticResource MainBackgroundColor}"
                         DockPanel.Dock="Bottom"
                         BorderThickness="0" 
                         Height="70"
                         HorizontalAlignment="Left"
                         Padding="0,0,0,0">
-                <Grid Margin="10,0,0,0" Background="#1c1c1c">
+                <Grid Margin="10,0,0,0" Background="{StaticResource MainBackgroundColor}">
                     <TextBlock FontSize="16"
                             TextAlignment="Left" 
                             Foreground="Gray"
@@ -48,8 +51,8 @@
                     <TextBox Name="EnterBox"
                             FontSize="16"
                             TextAlignment="Left" 
-                            Foreground="white"
-                            Background="Transparent"
+                            Foreground="{StaticResource MainTextColor}"
+                            Background="{StaticResource EmptyObjectColor}"
                             BorderThickness="0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Stretch"
@@ -59,7 +62,37 @@
                             Width="750"/>
                 </Grid>
             </Border>
-            <ListView ItemsSource="{Binding Messages}" FontSize="24" BorderThickness="0" HorizontalAlignment="Stretch" Background="#454545" Foreground="White"/>
+            <ListView ItemsSource="{Binding Messages}" 
+                      FontSize="24" 
+                      BorderThickness="0" 
+                      HorizontalAlignment="Stretch"
+                      Background="{StaticResource SomePanelColor}" 
+                      Foreground="{StaticResource MainTextColor}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:MessageModel}">
+                        <Border Background="{StaticResource MainBackgroundColor}"
+                            HorizontalAlignment="{Binding Send, Converter={StaticResource MessageAligmentConverter}}"
+                            CornerRadius="20"
+                            MaxWidth="400"
+                            Margin="10,10,10,10">
+                        <TextBlock TextWrapping="Wrap"
+                            Text="{Binding Message}" 
+                            Margin="10,10,10,10"/>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </DockPanel>
     </Grid>
 </UserControl>

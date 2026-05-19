@@ -35,6 +35,9 @@ namespace MessengerDesktop.ViewModels
         public MainViewModel() 
         {
             DialogPanel = choiceDialogPlaceholder_VM;
+
+
+
             UserModel user1 = new UserModel();
             user1.Id = 0;
             user1.Name = "TestUser1";
@@ -43,11 +46,29 @@ namespace MessengerDesktop.ViewModels
             user2.Name = "TestUser2";
             ChatUserModel chatUser1 = new ChatUserModel();
             ChatUserModel chatUser2 = new ChatUserModel();
+
+            MessageModel message1 = new MessageModel();
+            message1.Send = false;
+            message1.Message = "hello!";
+
+            MessageModel message2 = new MessageModel();
+            message2.Send = true;
+            message2.Message = "Hi!";
+
+            MessageModel message3 = new MessageModel();
+            message3.Send = false;
+            message3.Message = "Good night.";
+
+            MessageModel message4 = new MessageModel();
+            message4.Send = true;
+            message4.Message = "bye.";
+
             chatUser1.User = user1;
-            chatUser1.Messages = new ObservableCollection<string>() {"hello", "hi"};
+            chatUser1.Messages = new ObservableCollection<MessageModel>() {message1, message2};
             chatUser1.LastMessage = chatUser1.Messages.Last();
+
             chatUser2.User = user2;
-            chatUser2.Messages = new ObservableCollection<string>() { "Good night.", "Bye." };
+            chatUser2.Messages = new ObservableCollection<MessageModel>() { message3, message4 };
             chatUser2.LastMessage = chatUser2.Messages.Last();
             UserList.Add(chatUser1);
             UserList.Add(chatUser2);
