@@ -17,12 +17,12 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid x:Name="MainGrid" Style="{StaticResource HoverStyle}">
+    <Grid x:Name="MainGrid" Style="{StaticResource HoverStyle}" HorizontalAlignment="Left">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="18*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
@@ -37,7 +37,7 @@
                        Margin="0,10,0,10"/>
             <TextBlock HorizontalAlignment="Center" 
                        TextWrapping="Wrap" 
-                       Text="{Binding LastMessage.Message}" 
+                       Text="{Binding LastMessage.Message, UpdateSourceTrigger=PropertyChanged}" 
                        VerticalAlignment="Center" 
                        Width="216"
                        FontSize="14"

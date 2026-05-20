@@ -29,7 +29,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" MinWidth="200" MaxWidth="400"/>
             <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*" MinWidth="800"/>
+            <ColumnDefinition Width="*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Column="0"
@@ -38,7 +38,7 @@
              ItemsSource="{Binding UserList}"
              SelectedItem="{Binding SelectUserDialog}"
              Padding="0,0,0,0"
-             HorizontalContentAlignment="Stretch">
+             HorizontalContentAlignment="Left">
 
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -63,12 +63,13 @@
                   Width="1"
                   HorizontalAlignment="Stretch"
                   VerticalAlignment="Stretch"
-                  Background="{StaticResource SecondBackgroundColor}"
+                  Background="{StaticResource MainBackgroundColor}"
                   ResizeDirection="Columns"
-                  ShowsPreview="True"/>
+                  ShowsPreview="False"/>
 
         <ContentControl Grid.Column="2"
                     Content="{Binding DialogPanel}"
-                    VerticalContentAlignment="Stretch"/>
+                    VerticalContentAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"/>
     </Grid>
 </Window>

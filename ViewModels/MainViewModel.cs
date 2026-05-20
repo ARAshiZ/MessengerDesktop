@@ -36,8 +36,6 @@ namespace MessengerDesktop.ViewModels
         {
             DialogPanel = choiceDialogPlaceholder_VM;
 
-
-
             UserModel user1 = new UserModel();
             user1.Id = 0;
             user1.Name = "TestUser1";

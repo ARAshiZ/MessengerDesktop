@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MessengerDesktop.Models;
 using System;
 using System.Collections.Generic;
@@ -9,21 +10,31 @@ using System.Threading.Tasks;
 
 namespace MessengerDesktop.ViewModels
 {
-    partial class DialogPanel_VM : ObservableObject
+    public partial class DialogPanel_VM : ObservableObject
     {
+        [ObservableProperty]
+        ChatUserModel _chatUser;
+
         [ObservableProperty]
         private string _messageText = string.Empty;
 
-        [ObservableProperty]
-        private string _userName = string.Empty;
-
-        [ObservableProperty]
-        private ObservableCollection<MessageModel> _messages = new();
+        [RelayCommand]
+        private void Send()
+        {
+            if (!string.IsNullOrWhiteSpace(MessageText))
+            {
+                MessageModel msg = new MessageModel();
+                msg.Message = MessageText;
+                msg.Send = true;
+                ChatUser.AddMessage(msg);
+                ChatUser.LastMessage = msg;
+                MessageText = string.Empty;
+            }
+        }
 
         public DialogPanel_VM(ChatUserModel chatUserModel)
         {
-            UserName = chatUserModel.User.Name;
-            Messages = chatUserModel.Messages;
+            ChatUser = chatUserModel;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessengerDesktop.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace MessengerDesktop.Views
     {
         public UserChatTemplate()
         {
-            InitializeComponent();
+            InitializeComponent();;
         }
     }
 }

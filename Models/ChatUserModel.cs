@@ -12,5 +12,9 @@ namespace MessengerDesktop.Models
         public UserModel User { get; set; }
         public ObservableCollection<MessageModel> Messages { get; set; }
         public MessageModel LastMessage { get; set; }
+        public void AddMessage(MessageModel msg)
+        {
+            Messages.Add(msg);
+        }
     }
 }
