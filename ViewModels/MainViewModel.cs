@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MessengerDesktop.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Media3D;
 
 namespace MessengerDesktop.ViewModels
 {
@@ -17,7 +19,8 @@ namespace MessengerDesktop.ViewModels
     {
 
         #region Fields
-        private object choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
+        private ChoiceDialogPlaceholder_VM choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
+        private DialogPanel_VM DialogPanel_VM = new DialogPanel_VM();
         #endregion
 
         #region Properties
@@ -29,6 +32,15 @@ namespace MessengerDesktop.ViewModels
 
         [ObservableProperty]
         private ChatUserModel _selectUserDialog;
+        #endregion
+
+        #region Commands
+        [RelayCommand]
+        private void Escape() 
+        {
+            SelectUserDialog = null;
+        }
+
         #endregion
 
         #region Constructor
@@ -74,9 +86,17 @@ namespace MessengerDesktop.ViewModels
         #endregion
 
         #region Methods
-        partial void OnSelectUserDialogChanged(ChatUserModel chatUserModel)
+        partial void OnSelectUserDialogChanged(ChatUserModel? value)
         {
-            DialogPanel = new DialogPanel_VM(chatUserModel);
+            if (value is null)
+            {
+                DialogPanel = choiceDialogPlaceholder_VM;
+            }
+            else
+            {
+                DialogPanel_VM.SetChatUserModel(value);
+                DialogPanel = DialogPanel_VM;
+            }
         }
         #endregion
     }

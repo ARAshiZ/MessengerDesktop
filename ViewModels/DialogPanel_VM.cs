@@ -32,9 +32,11 @@ namespace MessengerDesktop.ViewModels
             }
         }
 
-        public DialogPanel_VM(ChatUserModel chatUserModel)
+        public DialogPanel_VM()
         {
-            ChatUser = chatUserModel;
+
         }
+
+        public void SetChatUserModel(ChatUserModel chatUserModel) => ChatUser = chatUserModel;
     }
 }

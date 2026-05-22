@@ -38,7 +38,6 @@
     </UserControl.Resources>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-
         <DockPanel LastChildFill="True" HorizontalAlignment="Stretch" Background="{StaticResource MainBackgroundColor}">
             <Border BorderThickness="0" 
                         DockPanel.Dock="Top" 
