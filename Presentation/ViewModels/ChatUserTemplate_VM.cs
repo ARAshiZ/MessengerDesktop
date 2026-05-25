@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MessengerDesktop.Models;
+using MessengerDesktop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessengerDesktop.ViewModels
+namespace MessengerDesktop.Presentation.ViewModels
 {
     public partial class ChatUserTemplate_VM : ObservableObject
     {

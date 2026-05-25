@@ -1,5 +1,4 @@
-﻿using MessengerDesktop.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,16 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerDesktop.Views
+namespace MessengerDesktop.Presentation.Views
 {
     /// <summary>
-    /// Логика взаимодействия для UserChatTemplate.xaml
+    /// Логика взаимодействия для ChoiceDialogPlaceholder.xaml
     /// </summary>
-    public partial class UserChatTemplate : UserControl
+    public partial class ChoiceDialogPlaceholder : UserControl
     {
-        public UserChatTemplate()
+        public ChoiceDialogPlaceholder()
         {
-            InitializeComponent();;
+            InitializeComponent();
         }
     }
 }

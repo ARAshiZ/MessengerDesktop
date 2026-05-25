@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MessengerDesktop.Models;
+using MessengerDesktop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
-namespace MessengerDesktop.ViewModels
+namespace MessengerDesktop.Presentation.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {

@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerDesktop.Views
+namespace MessengerDesktop.Presentation.Views
 {
     /// <summary>
     /// Логика взаимодействия для DialogPlaceholder.xaml

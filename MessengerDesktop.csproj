@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Core\Services\" />
+    <Folder Include="Infrastructure\Database\Configurations\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 

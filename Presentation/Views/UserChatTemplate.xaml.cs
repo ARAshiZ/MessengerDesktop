@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessengerDesktop.Presentation.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerDesktop.Views
+namespace MessengerDesktop.Presentation.Views
 {
     /// <summary>
-    /// Логика взаимодействия для DialogPanel.xaml
+    /// Логика взаимодействия для UserChatTemplate.xaml
     /// </summary>
-    public partial class DialogPanel : UserControl
+    public partial class UserChatTemplate : UserControl
     {
-        public DialogPanel()
+        public UserChatTemplate()
         {
-            InitializeComponent();
+            InitializeComponent();;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessengerDesktop.Models
+namespace MessengerDesktop.Core.Models
 {
     public class ChatUserModel 
     {

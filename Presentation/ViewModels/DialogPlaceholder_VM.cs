@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessengerDesktop.ViewModels
+namespace MessengerDesktop.Presentation.ViewModels
 {
     public class DialogPlaceholder_VM : ObservableObject
     {

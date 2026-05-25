@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessengerDesktop.ViewModels
+namespace MessengerDesktop.Presentation.ViewModels
 {
     class ChoiceDialogPlaceholder_VM
     {

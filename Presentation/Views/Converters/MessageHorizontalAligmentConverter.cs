@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MessengerDesktop.Views.Converters
+namespace MessengerDesktop.Presentation.Views.Converters
 {
     public class MessageHorizontalAligmentConverter : IValueConverter
     {

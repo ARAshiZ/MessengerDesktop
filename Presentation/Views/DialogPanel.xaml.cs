@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerDesktop.Views
+namespace MessengerDesktop.Presentation.Views
 {
     /// <summary>
-    /// Логика взаимодействия для ChoiceDialogPlaceholder.xaml
+    /// Логика взаимодействия для DialogPanel.xaml
     /// </summary>
-    public partial class ChoiceDialogPlaceholder : UserControl
+    public partial class DialogPanel : UserControl
     {
-        public ChoiceDialogPlaceholder()
+        public DialogPanel()
         {
             InitializeComponent();
         }
