@@ -30,7 +30,7 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="MainListGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" MinWidth="200" MaxWidth="400"/>
             <ColumnDefinition Width="1"/>
@@ -43,14 +43,15 @@
              ItemsSource="{Binding UserList}"
              SelectedItem="{Binding SelectUserDialog}"
              Padding="0,0,0,0"
-             HorizontalContentAlignment="Left">
+             HorizontalContentAlignment="Left"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <ContentPresenter />
+                                <ContentPresenter Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>

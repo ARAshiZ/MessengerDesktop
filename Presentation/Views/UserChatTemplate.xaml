@@ -35,13 +35,15 @@
                        VerticalAlignment="Center" 
                        Margin="0,10,0,10"/>
             <TextBlock HorizontalAlignment="Stretch" 
-                       TextWrapping="Wrap" 
-                       Text="{Binding LastMessage.Message, UpdateSourceTrigger=PropertyChanged}" 
+                       TextWrapping="NoWrap" 
+                       Text="{Binding LastMessage, UpdateSourceTrigger=PropertyChanged}" 
                        VerticalAlignment="Center" 
                        FontSize="14"
                        Foreground="{StaticResource SecondTextColor}"
                        Grid.Row="1"
-                       Margin="0,0,0,10"/>
+                       Margin="0,0,0,10"
+                       TextTrimming="WordEllipsis"
+                       MaxWidth="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}},Path=ActualWidth}"/>
         </Grid>
         <Ellipse HorizontalAlignment="Center" Stroke="White" Fill="white" VerticalAlignment="Center" Width="50" Height="50" Margin="5,0,5,0"/>
     </Grid>

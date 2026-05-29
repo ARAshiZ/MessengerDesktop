@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MessengerDesktop.Core.Models;
+using MessengerDesktop.Infrastructure.Database.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,8 @@ namespace MessengerDesktop.Presentation.ViewModels
     {
 
         #region Fields
+        private readonly UserRepository userRepository = new();
+        private readonly ChatUserRepository chatUserRepository = new();
         private ChoiceDialogPlaceholder_VM choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
         private DialogPanel_VM DialogPanel_VM = new DialogPanel_VM();
         #endregion
@@ -48,40 +51,29 @@ namespace MessengerDesktop.Presentation.ViewModels
         {
             DialogPanel = choiceDialogPlaceholder_VM;
 
-            UserModel user1 = new UserModel();
-            user1.Id = 0;
-            user1.Name = "TestUser1";
-            UserModel user2 = new UserModel();
-            user2.Id = 0;
-            user2.Name = "TestUser2";
-            ChatUserModel chatUser1 = new ChatUserModel();
-            ChatUserModel chatUser2 = new ChatUserModel();
+            //var user1 = new UserModel();
+            //user1.Name = "TestUser1";
+            //userRepository.Add(user1);
 
-            MessageModel message1 = new MessageModel();
-            message1.Send = false;
-            message1.Message = "hello!";
+            //var user2 = new UserModel();
+            //user2.Name = "TestUser2";
+            //userRepository.Add(user2);
 
-            MessageModel message2 = new MessageModel();
-            message2.Send = true;
-            message2.Message = "Hi!";
+            //var chatUser1 = new ChatUserModel();
+            //chatUser1.User = user1;
+            //chatUser1.Messages = null;
+            //chatUserRepository.Add(chatUser1);
 
-            MessageModel message3 = new MessageModel();
-            message3.Send = false;
-            message3.Message = "Good night.";
+            //var chatUser2 = new ChatUserModel();
+            //chatUser2.User = user2;
+            //chatUser2.Messages = null;
+            //chatUserRepository.Add(chatUser2);
 
-            MessageModel message4 = new MessageModel();
-            message4.Send = true;
-            message4.Message = "bye.";
-
-            chatUser1.User = user1;
-            chatUser1.Messages = new ObservableCollection<MessageModel>() {message1, message2};
-            chatUser1.LastMessage = chatUser1.Messages.Last();
-
-            chatUser2.User = user2;
-            chatUser2.Messages = new ObservableCollection<MessageModel>() { message3, message4 };
-            chatUser2.LastMessage = chatUser2.Messages.Last();
-            UserList.Add(chatUser1);
-            UserList.Add(chatUser2);
+            foreach (var chatUser in chatUserRepository.FindAll()) 
+            {
+                UserList.Add(chatUser);
+            }
+            
         }
         #endregion
 

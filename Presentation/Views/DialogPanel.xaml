@@ -109,7 +109,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:MessageModel}">
                         <Border Background="{StaticResource MainBackgroundColor}"
-                            HorizontalAlignment="{Binding Send, Converter={StaticResource MessageAligmentConverter}}"
+                            HorizontalAlignment="Right"
                             CornerRadius="20"
                             MaxWidth="400"
                             Margin="10,10,10,10">

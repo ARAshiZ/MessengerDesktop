@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MessengerDesktop.Core.Models;
+using MessengerDesktop.Infrastructure.Database.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,8 @@ namespace MessengerDesktop.Presentation.ViewModels
 {
     public partial class DialogPanel_VM : ObservableObject
     {
+        private readonly MessageRepository messageRepository = new MessageRepository();
+
         [ObservableProperty]
         ChatUserModel _chatUser;
 
@@ -21,15 +24,15 @@ namespace MessengerDesktop.Presentation.ViewModels
         [RelayCommand]
         private void Send()
         {
-            if (!string.IsNullOrWhiteSpace(MessageText))
+            if (ChatUser != null && !string.IsNullOrWhiteSpace(MessageText)) 
             {
-                MessageModel msg = new MessageModel();
+                var msg = new MessageModel();
+                msg.ChatUser = ChatUser;
                 msg.Message = MessageText;
-                msg.Send = true;
-                ChatUser.AddMessage(msg);
-                ChatUser.LastMessage = msg;
+                messageRepository.Add(msg);
                 MessageText = string.Empty;
             }
+
         }
 
         public DialogPanel_VM()
