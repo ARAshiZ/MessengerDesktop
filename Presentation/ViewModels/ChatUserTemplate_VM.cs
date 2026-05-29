@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MessengerDesktop.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,6 @@ namespace MessengerDesktop.Presentation.ViewModels
 
         public ChatUserTemplate_VM() 
         {
-
         }
     }
 }
