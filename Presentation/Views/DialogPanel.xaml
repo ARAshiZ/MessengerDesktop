@@ -46,7 +46,7 @@
                         HorizontalAlignment="Stretch">
                 <Label Foreground="{StaticResource MainTextColor}"
                            FontSize="16" 
-                           Content="{Binding ChatUser.User.Name}"  
+                           Content="{Binding Name}"  
                            Height="50"
                            HorizontalAlignment="Left"
                            HorizontalContentAlignment="Left"/>
@@ -103,7 +103,7 @@
             </Grid>
             <controls:ChatListView 
                       ScrollViewer.CanContentScroll="False"
-                      ItemsSource="{Binding ChatUser.Messages}"            
+                      ItemsSource="{Binding Messages}"            
                       FontSize="24" 
                       BorderThickness="0" 
                       HorizontalAlignment="Stretch"

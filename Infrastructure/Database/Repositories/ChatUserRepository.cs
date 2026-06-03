@@ -55,6 +55,7 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
             using (var context = new AppDbContext())
             {
                 return context.ChatUsers
+                    .Where(entity => entity.Id == ID)
                     .Include(u => u.User)
                     .Include(m => m.Messages)
                     .FirstOrDefault();

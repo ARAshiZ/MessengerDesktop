@@ -14,7 +14,6 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
         {
             using (var context = new AppDbContext())
             {
-                context.ChatUsers.Attach(Message.ChatUser);
                 context.Messages.Add(Message);
                 context.SaveChanges();
             }
@@ -23,7 +22,6 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
         {
             using (var context = new AppDbContext())
             {
-                context.ChatUsers.Attach(Message.ChatUser);
                 context.Messages.Remove(Message);
                 context.SaveChanges();
             }
@@ -32,7 +30,6 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
         {
             using (var context = new AppDbContext())
             {
-                context.ChatUsers.Attach(Message.ChatUser);
                 context.Messages.Update(Message);
                 context.SaveChanges();
             }

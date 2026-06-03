@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using MessengerDesktop.Core.Models;
 using MessengerDesktop.Infrastructure.Database.Repositories;
+using MessengerDesktop.Infrastructure.DataTransferObjects;
+using MessengerDesktop.Infrastructure.Factories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +22,6 @@ namespace MessengerDesktop.Presentation.ViewModels
     {
 
         #region Fields
-        private readonly UserRepository userRepository = new();
         private readonly ChatUserRepository chatUserRepository = new();
         private ChoiceDialogPlaceholder_VM choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
         private DialogPanel_VM DialogPanel_VM = new DialogPanel_VM();
@@ -28,13 +29,13 @@ namespace MessengerDesktop.Presentation.ViewModels
 
         #region Properties
         [ObservableProperty]
-        private ObservableCollection<ChatUserModel> _userList = new();
+        private ObservableCollection<ChatUserData> _userList = new();
 
         [ObservableProperty]
         private object _dialogPanel;
 
         [ObservableProperty]
-        private ChatUserModel _selectUserDialog;
+        private ChatUserData _selectUserDialog;
         #endregion
 
         #region Commands
@@ -51,34 +52,20 @@ namespace MessengerDesktop.Presentation.ViewModels
         {
             DialogPanel = choiceDialogPlaceholder_VM;
 
-            //var user1 = new UserModel();
-            //user1.Name = "TestUser1";
-            //userRepository.Add(user1);
 
-            //var user2 = new UserModel();
-            //user2.Name = "TestUser2";
-            //userRepository.Add(user2);
-
-            //var chatUser1 = new ChatUserModel();
-            //chatUser1.User = user1;
-            //chatUser1.Messages = null;
-            //chatUserRepository.Add(chatUser1);
-
-            //var chatUser2 = new ChatUserModel();
-            //chatUser2.User = user2;
-            //chatUser2.Messages = null;
-            //chatUserRepository.Add(chatUser2);
-
-            foreach (var chatUser in chatUserRepository.FindAll()) 
-            {
-                UserList.Add(chatUser);
-            }
+            var userList = chatUserRepository.FindAll()
+                .Select(entity => ChatUserDataFactory.CreateChatUser(
+                    entity.User.Name, 
+                    entity.Messages.LastOrDefault()?.Message ?? "message_not_found",
+                    entity.Id))
+                .ToList();
+            UserList = new ObservableCollection<ChatUserData>(userList);
             
         }
         #endregion
 
         #region Methods
-        partial void OnSelectUserDialogChanged(ChatUserModel? value)
+        partial void OnSelectUserDialogChanged(ChatUserData? value)
         {
             if (value is null)
             {
@@ -86,7 +73,7 @@ namespace MessengerDesktop.Presentation.ViewModels
             }
             else
             {
-                DialogPanel_VM.SetChatUserModel(value);
+                DialogPanel_VM.LoadChatUser(value);
                 DialogPanel = DialogPanel_VM;
             }
         }
