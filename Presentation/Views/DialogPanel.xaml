@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MessengerDesktop.Presentation.Views"
              xmlns:vm="clr-namespace:MessengerDesktop.Presentation.ViewModels"
              xmlns:models="clr-namespace:MessengerDesktop.Core.Models"
+             xmlns:controls="clr-namespace:MessengerDesktop.Presentation.Controls"
              xmlns:converter="clr-namespace:MessengerDesktop.Presentation.Views.Converters"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
@@ -100,13 +101,15 @@
                         Padding="0,0,0,0">
                 </Button>
             </Grid>
-            <ListView ItemsSource="{Binding ChatUser.Messages}" 
+            <controls:ChatListView 
+                      ScrollViewer.CanContentScroll="False"
+                      ItemsSource="{Binding ChatUser.Messages}"            
                       FontSize="24" 
                       BorderThickness="0" 
                       HorizontalAlignment="Stretch"
                       Background="{StaticResource SomePanelColor}" 
                       Foreground="{StaticResource MainTextColor}">
-                <ListView.ItemTemplate>
+                <controls:ChatListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:MessageModel}">
                         <Border Background="{StaticResource MainBackgroundColor}"
                             HorizontalAlignment="Right"
@@ -119,8 +122,8 @@
                             Margin="10,10,10,10"/>
                         </Border>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
+                </controls:ChatListView.ItemTemplate>
+                <controls:ChatListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Template">
                             <Setter.Value>
@@ -130,8 +133,8 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                </controls:ChatListView.ItemContainerStyle>
+            </controls:ChatListView>
         </DockPanel>
     </Grid>
 </UserControl>

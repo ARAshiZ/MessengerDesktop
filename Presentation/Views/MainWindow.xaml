@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerDesktop.Presentation.Views"
         xmlns:vm="clr-namespace:MessengerDesktop.Presentation.ViewModels"
+        xmlns:controls="clr-namespace:MessengerDesktop.Presentation.Controls"
         xmlns:models="clr-namespace:MessengerDesktop.Core.Models"
         xmlns:views="clr-namespace:MessengerDesktop.Presentation.Views"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -37,7 +38,7 @@
             <ColumnDefinition Width="*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
 
-        <ListView x:Name="DialogUserList" Grid.Column="0"
+        <controls:ChatListView x:Name="DialogUserList" Grid.Column="0"
              Background="{StaticResource MainBackgroundColor}"
              BorderThickness="0"
              ItemsSource="{Binding UserList}"
@@ -46,7 +47,7 @@
              HorizontalContentAlignment="Left"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-            <ListView.ItemContainerStyle>
+            <controls:ChatListView.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
                         <Setter.Value>
@@ -56,14 +57,14 @@
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </ListView.ItemContainerStyle>
+            </controls:ChatListView.ItemContainerStyle>
 
-            <ListView.ItemTemplate>
+            <controls:ChatListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type models:ChatUserModel}">
                     <local:UserChatTemplate/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </controls:ChatListView.ItemTemplate>
+        </controls:ChatListView>
 
         <GridSplitter Grid.Column="1"
                   Width="1"
