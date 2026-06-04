@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerDesktop.Presentation.Views"
         xmlns:vm="clr-namespace:MessengerDesktop.Presentation.ViewModels"
-        xmlns:dto="clr-namespace:MessengerDesktop.Infrastructure.DataTransferObjects"
         xmlns:controls="clr-namespace:MessengerDesktop.Presentation.Controls"
         xmlns:models="clr-namespace:MessengerDesktop.Core.Models"
         xmlns:views="clr-namespace:MessengerDesktop.Presentation.Views"
@@ -61,7 +60,7 @@
             </controls:ChatListView.ItemContainerStyle>
 
             <controls:ChatListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type dto:ChatUserData}">
+                <DataTemplate DataType="{x:Type vm:ChatUserViewModel}">
                     <local:UserChatTemplate/>
                 </DataTemplate>
             </controls:ChatListView.ItemTemplate>

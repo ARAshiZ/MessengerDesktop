@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MessengerDesktop.Core.Models;
 using MessengerDesktop.Infrastructure.Database.Repositories;
-using MessengerDesktop.Infrastructure.DataTransferObjects;
+using MessengerDesktop.Infrastructure.Messengers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,7 +39,9 @@ namespace MessengerDesktop.Presentation.ViewModels
                 msg.Message = MessageText;
                 messageRepository.Add(msg);
                 Messages.Add(msg);
+                WeakReferenceMessenger.Default.Send(new LastMessageMessage(chatUserId, MessageText));
                 MessageText = string.Empty;
+
             }
 
         }
@@ -48,11 +51,11 @@ namespace MessengerDesktop.Presentation.ViewModels
 
         }
 
-        public void LoadChatUser(ChatUserData ChatUserData)
+        public void LoadChatUser(ChatUserViewModel ChatUserData)
         {
-           var ChatUser = chatUserRepository.FindByID(ChatUserData.ID);
+           var ChatUser = chatUserRepository.FindByID(ChatUserData.ChatUserId);
            chatUserId = ChatUser.Id;
-           Name = ChatUserData.Name;
+           Name = ChatUserData.ChatUserName;
            Messages?.Clear();
            Messages = new ObservableCollection<MessageModel>(ChatUser.Messages);
         }

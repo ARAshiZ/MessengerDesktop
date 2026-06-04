@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MessengerDesktop.Core.Models;
 using MessengerDesktop.Infrastructure.Database.Repositories;
-using MessengerDesktop.Infrastructure.DataTransferObjects;
 using MessengerDesktop.Infrastructure.Factories;
+using MessengerDesktop.Infrastructure.Messengers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ using System.Windows.Media.Media3D;
 
 namespace MessengerDesktop.Presentation.ViewModels
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject, IRecipient<LastMessageMessage>
     {
 
         #region Fields
@@ -29,13 +30,13 @@ namespace MessengerDesktop.Presentation.ViewModels
 
         #region Properties
         [ObservableProperty]
-        private ObservableCollection<ChatUserData> _userList = new();
+        private ObservableCollection<ChatUserViewModel> _userList = new();
 
         [ObservableProperty]
         private object _dialogPanel;
 
         [ObservableProperty]
-        private ChatUserData _selectUserDialog;
+        private ChatUserViewModel _selectUserDialog;
         #endregion
 
         #region Commands
@@ -48,24 +49,24 @@ namespace MessengerDesktop.Presentation.ViewModels
         #endregion
 
         #region Constructor
-        public MainViewModel() 
+        public MainViewModel()
         {
             DialogPanel = choiceDialogPlaceholder_VM;
+            WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
 
-
-            var userList = chatUserRepository.FindAll()
-                .Select(entity => ChatUserDataFactory.CreateChatUser(
-                    entity.User.Name, 
-                    entity.Messages.LastOrDefault()?.Message ?? "message_not_found",
-                    entity.Id))
+                var userList = chatUserRepository.FindAll()
+                .Select(entity => ChatUserViewModelFactory.CreateChatUser(
+                    entity.User.Name,
+                    entity.Id,
+                    entity.Messages.LastOrDefault()?.Message ?? "message_not_found"))
                 .ToList();
-            UserList = new ObservableCollection<ChatUserData>(userList);
+            UserList = new ObservableCollection<ChatUserViewModel>(userList);
             
         }
         #endregion
 
         #region Methods
-        partial void OnSelectUserDialogChanged(ChatUserData? value)
+        partial void OnSelectUserDialogChanged(ChatUserViewModel? value)
         {
             if (value is null)
             {
@@ -75,6 +76,15 @@ namespace MessengerDesktop.Presentation.ViewModels
             {
                 DialogPanel_VM.LoadChatUser(value);
                 DialogPanel = DialogPanel_VM;
+            }
+        }
+
+        public void Receive(LastMessageMessage message)
+        {
+            var ChatUser = UserList.First(x => x.ChatUserId == message.Id);
+            if (ChatUser != null)
+            {
+                ChatUser.LastMessage = message.lastMessage;
             }
         }
         #endregion

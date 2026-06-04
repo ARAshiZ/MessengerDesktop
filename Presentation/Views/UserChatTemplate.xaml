@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Stretch" 
                        TextWrapping="Wrap"  
-                       Text="{Binding Name}" 
+                       Text="{Binding ChatUserName}" 
                        Foreground="{StaticResource MainTextColor}"
                        FontSize="16"
                        VerticalAlignment="Center" 
