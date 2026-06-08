@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MessengerDesktop.Presentation.ViewModels
 {
-    public partial class DialogPanel_VM : ObservableObject
+    public partial class DialogPanelViewModel : ObservableObject
     {
         private readonly MessageRepository messageRepository = new ();
         private readonly ChatUserRepository chatUserRepository = new();
@@ -43,10 +43,9 @@ namespace MessengerDesktop.Presentation.ViewModels
                 MessageText = string.Empty;
 
             }
-
         }
 
-        public DialogPanel_VM()
+        public DialogPanelViewModel()
         {
 
         }

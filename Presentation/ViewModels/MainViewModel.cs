@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MessengerDesktop.Core.Models;
 using MessengerDesktop.Infrastructure.Database.Repositories;
-using MessengerDesktop.Infrastructure.Factories;
 using MessengerDesktop.Infrastructure.Messengers;
 using System;
 using System.Collections.Generic;
@@ -24,8 +23,8 @@ namespace MessengerDesktop.Presentation.ViewModels
 
         #region Fields
         private readonly ChatUserRepository chatUserRepository = new();
-        private ChoiceDialogPlaceholder_VM choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholder_VM();
-        private DialogPanel_VM DialogPanel_VM = new DialogPanel_VM();
+        private ChoiceDialogPlaceholderViewModel choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholderViewModel();
+        private DialogPanelViewModel DialogPanel_VM = new DialogPanelViewModel();
         #endregion
 
         #region Properties
@@ -55,7 +54,7 @@ namespace MessengerDesktop.Presentation.ViewModels
             WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
 
                 var userList = chatUserRepository.FindAll()
-                .Select(entity => ChatUserViewModelFactory.CreateChatUser(
+                .Select(entity => new ChatUserViewModel(
                     entity.User.Name,
                     entity.Id,
                     entity.Messages.LastOrDefault()?.Message ?? "message_not_found"))

@@ -22,11 +22,11 @@
     </d:Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:ChoiceDialogPlaceholder_VM}">
+        <DataTemplate DataType="{x:Type vm:ChoiceDialogPlaceholderViewModel}">
             <views:ChoiceDialogPlaceholder/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:DialogPanel_VM}">
+        <DataTemplate DataType="{x:Type vm:DialogPanelViewModel}">
             <views:DialogPanel/>
         </DataTemplate>
     </Window.Resources>
