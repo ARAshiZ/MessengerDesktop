@@ -17,10 +17,10 @@ namespace MessengerDesktop.Presentation.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mainVM)
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
+            this.DataContext = mainVM;
         }
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)

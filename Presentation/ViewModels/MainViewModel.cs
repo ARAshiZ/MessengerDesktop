@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using MessengerDesktop.Core.Models;
 using MessengerDesktop.Infrastructure.Database.Repositories;
 using MessengerDesktop.Infrastructure.Messengers;
+using MessengerDesktop.Presentation.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,9 +23,9 @@ namespace MessengerDesktop.Presentation.ViewModels
     {
 
         #region Fields
-        private readonly ChatUserRepository chatUserRepository = new();
-        private ChoiceDialogPlaceholderViewModel choiceDialogPlaceholder_VM = new ChoiceDialogPlaceholderViewModel();
-        private DialogPanelViewModel DialogPanel_VM = new DialogPanelViewModel();
+        private readonly IRepository<ChatUserModel> _chatUserRepository;
+        public DialogPlaceholderViewModel DialogPlaceholder_VM;
+        public DialogPanelViewModel DialogPanel_VM;
         #endregion
 
         #region Properties
@@ -48,12 +49,17 @@ namespace MessengerDesktop.Presentation.ViewModels
         #endregion
 
         #region Constructor
-        public MainViewModel()
+        public MainViewModel(
+            DialogPanelViewModel _dialogPanel, 
+            DialogPlaceholderViewModel _dialogPlaceholder,
+            IRepository<ChatUserModel> chatUserRepo)
         {
-            DialogPanel = choiceDialogPlaceholder_VM;
+            _chatUserRepository = chatUserRepo;
+            DialogPlaceholder_VM = _dialogPlaceholder;
+            DialogPanel_VM = _dialogPanel;
+            DialogPanel = DialogPlaceholder_VM;
             WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
-
-                var userList = chatUserRepository.FindAll()
+            var userList = _chatUserRepository.FindAll()
                 .Select(entity => new ChatUserViewModel(
                     entity.User.Name,
                     entity.Id,
@@ -69,7 +75,7 @@ namespace MessengerDesktop.Presentation.ViewModels
         {
             if (value is null)
             {
-                DialogPanel = choiceDialogPlaceholder_VM;
+                DialogPanel = DialogPlaceholder_VM;
             }
             else
             {

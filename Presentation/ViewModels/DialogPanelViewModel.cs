@@ -15,10 +15,16 @@ namespace MessengerDesktop.Presentation.ViewModels
 {
     public partial class DialogPanelViewModel : ObservableObject
     {
-        private readonly MessageRepository messageRepository = new ();
-        private readonly ChatUserRepository chatUserRepository = new();
+        private readonly IRepository<MessageModel> messageRepository;
+        private readonly IRepository<ChatUserModel> chatUserRepository;
 
         private int chatUserId = 0;
+
+        public DialogPanelViewModel(IRepository<ChatUserModel> chatUserRepo, IRepository<MessageModel> msgRepo)
+        {
+            messageRepository = msgRepo;
+            chatUserRepository = chatUserRepo;
+        }
 
         [ObservableProperty]
         private ObservableCollection<MessageModel> _messages;
@@ -43,11 +49,6 @@ namespace MessengerDesktop.Presentation.ViewModels
                 MessageText = string.Empty;
 
             }
-        }
-
-        public DialogPanelViewModel()
-        {
-
         }
 
         public void LoadChatUser(ChatUserViewModel ChatUserData)

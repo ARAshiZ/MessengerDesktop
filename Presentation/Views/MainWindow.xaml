@@ -17,13 +17,9 @@
         <KeyBinding Key="Escape" Command="{Binding EscapeCommand}"/>
     </Window.InputBindings>
 
-    <d:Window.DataContext>
-        <vm:MainViewModel/>
-    </d:Window.DataContext>
-
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:ChoiceDialogPlaceholderViewModel}">
-            <views:ChoiceDialogPlaceholder/>
+        <DataTemplate DataType="{x:Type vm:DialogPlaceholderViewModel}">
+            <views:DialogPlaceholder/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vm:DialogPanelViewModel}">
