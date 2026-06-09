@@ -1,4 +1,5 @@
 ﻿using MessengerDesktop.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
     public class UserRepository : IRepository<UserModel>
     {
-        public void Add(UserModel User)
+        public async Task Add(UserModel User)
         {
             using (var context = new AppDbContext())
             {
@@ -17,7 +18,7 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
                 context.SaveChanges();
             }
         }
-        public void Delete(UserModel User)
+        public async Task Delete(UserModel User)
         {
             using (var context = new AppDbContext())
             {
@@ -25,7 +26,7 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
                 context.SaveChanges();
             }
         }
-        public void Update(UserModel User)
+        public async Task Update(UserModel User)
         {
             using (var context = new AppDbContext())
             {
@@ -34,27 +35,27 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
             }
         }
 
-        public IEnumerable<UserModel> FindAll() 
+        public async Task<IEnumerable<UserModel>> FindAll() 
         {
             using (var context = new AppDbContext())
             {
-                return context.Users.ToList();
+                return await context.Users.ToListAsync();
             }
         }
 
-        public UserModel FindByID(int ID)
+        public async Task<UserModel> FindByID(int ID)
         {
             using (var context = new AppDbContext())
             {
-                return context.Users.FirstOrDefault(u => u.Id == ID);
+                return await context.Users.FirstOrDefaultAsync(u => u.Id == ID);
             }
         }
 
-        public UserModel FindByName(string Name)
+        public async Task<UserModel> FindByName(string Name)
         {
             using (var context = new AppDbContext())
             {
-                return context.Users.FirstOrDefault(u => u.Name == Name);
+                return await context.Users.FirstOrDefaultAsync(u => u.Name == Name);
             }
         }
     }

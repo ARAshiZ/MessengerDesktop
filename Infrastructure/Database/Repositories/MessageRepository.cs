@@ -10,48 +10,48 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
     public class MessageRepository : IRepository<MessageModel>
     {
-        public void Add(MessageModel Message)
+        public async Task Add(MessageModel Message)
         {
             using (var context = new AppDbContext())
             {
                 context.Messages.Add(Message);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
-        public void Delete(MessageModel Message)
+        public async Task Delete(MessageModel Message)
         {
             using (var context = new AppDbContext())
             {
                 context.Messages.Remove(Message);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
-        public void Update(MessageModel Message)
+        public async Task Update(MessageModel Message)
         {
             using (var context = new AppDbContext())
             {
                 context.Messages.Update(Message);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public IEnumerable<MessageModel> FindAll()
+        public async Task<IEnumerable<MessageModel>> FindAll()
         {
             using (var context = new AppDbContext())
             {
-                return context.Messages
+                return await context.Messages
                     .Include(cu => cu.ChatUser)
-                    .ToList();
+                    .ToListAsync();
             }
         }
 
-        public MessageModel FindByID(int ID)
+        public async Task<MessageModel> FindByID(int ID)
         {
             using (var context = new AppDbContext())
             {
-                return context.Messages
+                return await context.Messages
                     .Include(cu => cu.ChatUser)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync(msg => msg.Id == ID);
             }
         }
     }

@@ -8,10 +8,10 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
     public interface IRepository<T>
     {
-        void Add(T Entity);
-        void Delete(T Entity);
-        void Update(T Entity);
-        IEnumerable<T> FindAll();
-        T FindByID(int ID);
+        Task Add(T Entity);
+        Task Delete(T Entity);
+        Task Update(T Entity);
+        Task<IEnumerable<T>> FindAll();
+        Task<T> FindByID(int ID);
     }
 }

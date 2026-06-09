@@ -36,14 +36,14 @@ namespace MessengerDesktop.Presentation.ViewModels
         private string _name = string.Empty;
 
         [RelayCommand]
-        private void Send()
+        private async Task Send()
         {
             if (!string.IsNullOrWhiteSpace(MessageText)) 
             {
                 var msg = new MessageModel();
                 msg.ChatUserID = chatUserId;
                 msg.Message = MessageText;
-                messageRepository.Add(msg);
+                await messageRepository.Add(msg);
                 Messages.Add(msg);
                 WeakReferenceMessenger.Default.Send(new LastMessageMessage(chatUserId, MessageText));
                 MessageText = string.Empty;
@@ -51,9 +51,9 @@ namespace MessengerDesktop.Presentation.ViewModels
             }
         }
 
-        public void LoadChatUser(ChatUserViewModel ChatUserData)
+        public async Task LoadChatUser(ChatUserViewModel ChatUserData)
         {
-           var ChatUser = chatUserRepository.FindByID(ChatUserData.ChatUserId);
+           var ChatUser = await chatUserRepository.FindByID(ChatUserData.ChatUserId);
            chatUserId = ChatUser.Id;
            Name = ChatUserData.ChatUserName;
            Messages?.Clear();

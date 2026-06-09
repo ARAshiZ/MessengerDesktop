@@ -59,18 +59,24 @@ namespace MessengerDesktop.Presentation.ViewModels
             DialogPanel_VM = _dialogPanel;
             DialogPanel = DialogPlaceholder_VM;
             WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
-            var userList = _chatUserRepository.FindAll()
+            GetUserList();
+            
+        }
+        #endregion
+
+        #region Methods
+        private async void GetUserList()
+        {
+            var entites = await _chatUserRepository.FindAll();
+            var userList = entites
                 .Select(entity => new ChatUserViewModel(
                     entity.User.Name,
                     entity.Id,
                     entity.Messages.LastOrDefault()?.Message ?? "message_not_found"))
                 .ToList();
             UserList = new ObservableCollection<ChatUserViewModel>(userList);
-            
         }
-        #endregion
 
-        #region Methods
         partial void OnSelectUserDialogChanged(ChatUserViewModel? value)
         {
             if (value is null)

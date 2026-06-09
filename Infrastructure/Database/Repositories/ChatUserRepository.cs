@@ -10,7 +10,7 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
     public class ChatUserRepository : IRepository<ChatUserModel>
     {
-        public void Add(ChatUserModel ChatUser)
+        public async Task Add(ChatUserModel ChatUser)
         {
             using (var context = new AppDbContext())
             {
@@ -19,46 +19,46 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
                     context.Users.Attach(ChatUser.User);  
                 }
                 context.ChatUsers.Add(ChatUser);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
-        public void Delete(ChatUserModel ChatUser)
+        public async Task Delete(ChatUserModel ChatUser)
         {
             using (var context = new AppDbContext())
             {
                 context.ChatUsers.Remove(ChatUser);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
-        public void Update(ChatUserModel ChatUser)
+        public async Task Update(ChatUserModel ChatUser)
         {
             using (var context = new AppDbContext())
             {
                 context.ChatUsers.Update(ChatUser);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public IEnumerable<ChatUserModel> FindAll()
+        public async Task<IEnumerable<ChatUserModel>> FindAll()
         {
             using (var context = new AppDbContext())
             {
-                return context.ChatUsers
+                return await context.ChatUsers
                     .Include(u => u.User)
                     .Include(m => m.Messages)
-                    .ToList();
+                    .ToListAsync();
             }
         }
 
-        public ChatUserModel FindByID(int ID)
+        public async Task<ChatUserModel> FindByID(int ID)
         {
             using (var context = new AppDbContext())
             {
-                return context.ChatUsers
+                return await context.ChatUsers
                     .Where(entity => entity.Id == ID)
                     .Include(u => u.User)
                     .Include(m => m.Messages)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
             }
         }
     }
