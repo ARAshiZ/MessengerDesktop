@@ -10,7 +10,7 @@ namespace MessengerDesktop.Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string PersonalKey { get; set; }
+        public string? PersonalKey { get; set; }
         public ICollection<ChatUserModel> Contacts { get; set; }
     }
 }
