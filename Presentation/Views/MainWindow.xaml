@@ -10,69 +10,14 @@
         xmlns:views="clr-namespace:MessengerDesktop.Presentation.Views"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Messenger" Height="800" Width="1200" MinHeight="400" MinWidth="800"
+        Title="Messenger" Height="800" Width="1300" MinHeight="400" MinWidth="800"
         WindowStartupLocation="CenterScreen">
+    <ContentControl
+            Content="{Binding ViewPanel}"
+            VerticalContentAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"/>
 
-    <Window.InputBindings>
-        <KeyBinding Key="Escape" Command="{Binding EscapeCommand}"/>
-    </Window.InputBindings>
 
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:DialogPlaceholderViewModel}">
-            <views:DialogPlaceholder/>
-        </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vm:DialogPanelViewModel}">
-            <views:DialogPanel/>
-        </DataTemplate>
-    </Window.Resources>
 
-    <Grid x:Name="MainListGrid">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" MinWidth="200" MaxWidth="400"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*" MinWidth="200"/>
-        </Grid.ColumnDefinitions>
-
-        <controls:ChatListView x:Name="DialogUserList" Grid.Column="0"
-             Background="{StaticResource MainBackgroundColor}"
-             BorderThickness="0"
-             ItemsSource="{Binding UserList}"
-             SelectedItem="{Binding SelectUserDialog}"
-             Padding="0,0,0,0"
-             HorizontalContentAlignment="Left"
-             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-
-            <controls:ChatListView.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <ContentPresenter Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}}"/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </controls:ChatListView.ItemContainerStyle>
-
-            <controls:ChatListView.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:ChatUserViewModel}">
-                    <local:UserChatTemplate/>
-                </DataTemplate>
-            </controls:ChatListView.ItemTemplate>
-        </controls:ChatListView>
-
-        <GridSplitter Grid.Column="1"
-                  Width="1"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  Background="{StaticResource MainBackgroundColor}"
-                  ResizeDirection="Columns"
-                  ShowsPreview="False"/>
-
-        <ContentControl Grid.Column="2"
-                    Content="{Binding DialogPanel}"
-                    VerticalContentAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch"/>
-    </Grid>
 </Window>

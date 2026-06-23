@@ -6,16 +6,6 @@
              xmlns:local="clr-namespace:MessengerDesktop.Presentation.Views"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300">
-    <UserControl.Resources>
-        <Style TargetType="Grid" x:Key="HoverStyle">
-            <Setter Property="Background" Value="{StaticResource MainBackgroundColor}"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource SecondBackgroundColor}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
 
     <Grid x:Name="MainGrid" Style="{StaticResource HoverStyle}" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>

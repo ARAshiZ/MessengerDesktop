@@ -19,85 +19,29 @@ using System.Windows.Media.Media3D;
 
 namespace MessengerDesktop.Presentation.ViewModels
 {
-    public partial class MainViewModel : ObservableObject, IRecipient<LastMessageMessage>
+    public partial class MainViewModel : ObservableObject
     {
 
         #region Fields
-        private readonly IRepository<ChatUserModel> _chatUserRepository;
-        public DialogPlaceholderViewModel DialogPlaceholder_VM;
-        public DialogPanelViewModel DialogPanel_VM;
+        public MainPanelViewModel MainPanelVM;
+        public AuthPanelViewModel AuthPanelVM;
         #endregion
 
         #region Properties
         [ObservableProperty]
-        private ObservableCollection<ChatUserViewModel> _userList = new();
-
-        [ObservableProperty]
-        private object _dialogPanel;
-
-        [ObservableProperty]
-        private ChatUserViewModel _selectUserDialog;
-        #endregion
-
-        #region Commands
-        [RelayCommand]
-        private void Escape() 
-        {
-            SelectUserDialog = null;
-        }
-
+        private object _viewPanel;
         #endregion
 
         #region Constructor
-        public MainViewModel(
-            DialogPanelViewModel _dialogPanel, 
-            DialogPlaceholderViewModel _dialogPlaceholder,
-            IRepository<ChatUserModel> chatUserRepo)
+        public MainViewModel(MainPanelViewModel _mainPanelVM, AuthPanelViewModel _authPanelVM)
         {
-            _chatUserRepository = chatUserRepo;
-            DialogPlaceholder_VM = _dialogPlaceholder;
-            DialogPanel_VM = _dialogPanel;
-            DialogPanel = DialogPlaceholder_VM;
-            WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
-            GetUserList();
-            
+            MainPanelVM = _mainPanelVM;
+            AuthPanelVM = _authPanelVM;
+            ViewPanel = AuthPanelVM;
         }
         #endregion
 
         #region Methods
-        private async void GetUserList()
-        {
-            var entites = await _chatUserRepository.FindAll();
-            var userList = entites
-                .Select(entity => new ChatUserViewModel(
-                    entity.User.Name,
-                    entity.Id,
-                    entity.Messages.LastOrDefault()?.Message ?? "message_not_found"))
-                .ToList();
-            UserList = new ObservableCollection<ChatUserViewModel>(userList);
-        }
-
-        partial void OnSelectUserDialogChanged(ChatUserViewModel? value)
-        {
-            if (value is null)
-            {
-                DialogPanel = DialogPlaceholder_VM;
-            }
-            else
-            {
-                DialogPanel_VM.LoadChatUser(value);
-                DialogPanel = DialogPanel_VM;
-            }
-        }
-
-        public void Receive(LastMessageMessage message)
-        {
-            var ChatUser = UserList.First(x => x.ChatUserId == message.Id);
-            if (ChatUser != null)
-            {
-                ChatUser.LastMessage = message.lastMessage;
-            }
-        }
         #endregion
     }
 }

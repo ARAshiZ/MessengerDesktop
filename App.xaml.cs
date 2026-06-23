@@ -24,6 +24,9 @@ namespace MessengerDesktop
 
             services.AddSingleton<DialogPanelViewModel>();
             services.AddSingleton<DialogPlaceholderViewModel>();
+            services.AddSingleton<AuthPanelViewModel>();
+            services.AddSingleton<MainPanelViewModel>();
+
 
             services.AddSingleton<IRepository<UserModel>, UserRepository>();
             services.AddSingleton<IRepository<ChatUserModel>, ChatUserRepository>();

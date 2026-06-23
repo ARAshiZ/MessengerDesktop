@@ -1,12 +1,40 @@
 ﻿<Application x:Class="MessengerDesktop.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MessengerDesktop">
+             xmlns:local="clr-namespace:MessengerDesktop"
+             xmlns:vm="clr-namespace:MessengerDesktop.Presentation.ViewModels"
+             xmlns:models="clr-namespace:MessengerDesktop.Core.Models"
+             xmlns:controls="clr-namespace:MessengerDesktop.Presentation.Controls"
+             xmlns:converter="clr-namespace:MessengerDesktop.Presentation.Views.Converters"
+             xmlns:views="clr-namespace:MessengerDesktop.Presentation.Views">
     <Application.Resources>
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Presentation/Styles/DarkTheme.xaml"/>
+                <ResourceDictionary Source="Presentation/Styles/RoundedButtonControl.xaml"/>
+                <ResourceDictionary Source="Presentation/Styles/ControlHoverEffect.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>     
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            
+            <converter:MessageHorizontalAligmentConverter x:Key="MessageAligmentConverter"/>
+            
+            <DataTemplate DataType="{x:Type vm:AuthPanelViewModel}">
+                <views:AuthPanel/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MainPanelViewModel}">
+                <views:MainPanel/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:DialogPlaceholderViewModel}">
+                <views:DialogPlaceholder/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DialogPanelViewModel}">
+                <views:DialogPanel/>
+            </DataTemplate>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
