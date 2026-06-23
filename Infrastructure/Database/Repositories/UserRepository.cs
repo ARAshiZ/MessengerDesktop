@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
-    public class UserRepository : IRepository<UserModel>
+    public class UserRepository : IUserRepository
     {
         public async Task Add(UserModel User)
         {
@@ -56,6 +56,14 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
             using (var context = new AppDbContext())
             {
                 return await context.Users.FirstOrDefaultAsync(u => u.Name == Name);
+            }
+        }
+
+        public async Task<UserModel> VerifyPersonalKey(string Key)
+        {
+            using (var context = new AppDbContext())
+            {
+                return await context.Users.FirstOrDefaultAsync(u => u.PersonalKey == Key);
             }
         }
     }
