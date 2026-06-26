@@ -16,11 +16,11 @@ namespace MessengerDesktop.Presentation.ViewModels
     public partial class DialogPanelViewModel : ObservableObject
     {
         private readonly IRepository<MessageModel> messageRepository;
-        private readonly IRepository<ChatUserModel> chatUserRepository;
+        private readonly IChatUserRepository chatUserRepository;
 
         private int chatUserId = 0;
 
-        public DialogPanelViewModel(IRepository<ChatUserModel> chatUserRepo, IRepository<MessageModel> msgRepo)
+        public DialogPanelViewModel(IChatUserRepository chatUserRepo, IRepository<MessageModel> msgRepo)
         {
             messageRepository = msgRepo;
             chatUserRepository = chatUserRepo;

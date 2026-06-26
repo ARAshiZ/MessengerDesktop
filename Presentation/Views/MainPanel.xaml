@@ -18,7 +18,7 @@
     <Grid x:Name="MainListGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*" MinWidth="200"/>
+            <ColumnDefinition Width="*" MinWidth="200" MaxWidth="700"/>
             <ColumnDefinition Width="4"/>
             <ColumnDefinition Width="*" MinWidth="400"/>
         </Grid.ColumnDefinitions>

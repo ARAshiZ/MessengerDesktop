@@ -38,10 +38,15 @@ namespace MessengerDesktop.Presentation.ViewModels
             MainPanelVM = _mainPanelVM;
             AuthPanelVM = _authPanelVM;
             ViewPanel = AuthPanelVM;
+            AuthPanelVM.LoginSuccess += (isAuthSuccess) =>
+            {
+                ViewPanel = MainPanelVM;
+            };
         }
         #endregion
 
         #region Methods
+
         #endregion
     }
 }

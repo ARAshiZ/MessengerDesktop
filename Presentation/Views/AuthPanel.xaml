@@ -14,11 +14,12 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             TextWrapping="Wrap"
-            Text="Введите сообщение..." 
+            Text="Введите ключ доступа" 
             Height="40"
+            Width="700"
             Visibility="{Binding ElementName=EnterBox, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" 
             IsHitTestVisible="False"
-            Width="800"/>
+            Padding="10,2,0,0"/>
 
         <TextBox Name="EnterBox"
             FontSize="24"
@@ -31,7 +32,7 @@
             TextWrapping="Wrap"
             Text="{Binding PersonalKey, UpdateSourceTrigger=PropertyChanged}" 
             Height="40"
-            Width="800"
+            Width="700"
             AcceptsReturn="False">
             <i:Interaction.Triggers>
                 <i:KeyTrigger Key="Return">
@@ -39,5 +40,14 @@
                 </i:KeyTrigger>
             </i:Interaction.Triggers>
         </TextBox>
+        <Button Style="{StaticResource RoundedButton}" 
+                Command="{Binding AuthCommand}"
+                Content="Войти" 
+                FontSize="24"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,120"
+                Height="50"
+                Width="200"/>
     </Grid>
 </UserControl>

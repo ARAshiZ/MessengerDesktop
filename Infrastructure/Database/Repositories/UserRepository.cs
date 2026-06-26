@@ -63,7 +63,17 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
         {
             using (var context = new AppDbContext())
             {
-                return await context.Users.FirstOrDefaultAsync(u => u.PersonalKey == Key);
+                var user = await context.Users
+                    .Include(u => u.Contacts)
+                    .FirstOrDefaultAsync(u => u.PersonalKey == Key);
+                if (user.PersonalKey == Key)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ namespace MessengerDesktop.Core.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public UserModel User { get; set; }
+        public int ContactUserId { get; set; }
         public ICollection<MessageModel> Messages { get; set; }
     }
 }

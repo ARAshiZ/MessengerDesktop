@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using MessengerDesktop.Core.Models;
+using MessengerDesktop.Core.Services.Interfaces;
 using MessengerDesktop.Infrastructure.Database.Repositories;
 using MessengerDesktop.Infrastructure.Messengers;
 using MessengerDesktop.Presentation.Views;
@@ -17,9 +18,11 @@ namespace MessengerDesktop.Presentation.ViewModels
     public partial class MainPanelViewModel : ObservableObject, IRecipient<LastMessageMessage>
     {
         #region Fields
-        private readonly IRepository<ChatUserModel> _chatUserRepository;
+        public UserModel User {  get; set; }
+        private readonly IChatUserRepository _chatUserRepository;
         public DialogPlaceholderViewModel DialogPlaceholder_VM;
         public DialogPanelViewModel DialogPanel_VM;
+        private IUserService UserService;
         #endregion
 
         #region Properties
@@ -46,14 +49,16 @@ namespace MessengerDesktop.Presentation.ViewModels
         public MainPanelViewModel(
             DialogPanelViewModel _dialogPanel,
             DialogPlaceholderViewModel _dialogPlaceholder,
-            IRepository<ChatUserModel> chatUserRepo)
+            IChatUserRepository chatUserRepo,
+            IUserService userService)
         {
+            UserService = userService;
             _chatUserRepository = chatUserRepo;
             DialogPlaceholder_VM = _dialogPlaceholder;
             DialogPanel_VM = _dialogPanel;
             DialogPanel = DialogPlaceholder_VM;
-            WeakReferenceMessenger.Default.Register<LastMessageMessage>(this, (r, m) => Receive(m));
-            GetUserList();
+            WeakReferenceMessenger.Default.Register<LastMessageMessage>(this);
+            UserService.UserChanged += OnUserChanged;
 
         }
         #endregion
@@ -61,7 +66,7 @@ namespace MessengerDesktop.Presentation.ViewModels
         #region Methods
         private async void GetUserList()
         {
-            var entites = await _chatUserRepository.FindAll();
+            var entites = await _chatUserRepository.FindAllByContact(User.Id);
             var userList = entites
                 .Select(entity => new ChatUserViewModel(
                     entity.User.Name,
@@ -84,6 +89,11 @@ namespace MessengerDesktop.Presentation.ViewModels
             }
         }
 
+        public void OnUserChanged(UserModel user)
+        {
+            User = user;
+            GetUserList();
+        }
         public void Receive(LastMessageMessage message)
         {
             var ChatUser = UserList.First(x => x.ChatUserId == message.Id);

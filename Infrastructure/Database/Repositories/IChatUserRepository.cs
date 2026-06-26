@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
-    public interface IUserRepository : IRepository<UserModel>
+    public interface IChatUserRepository : IRepository<ChatUserModel>
     {
-        Task<UserModel> FindByName(string Name);
-        Task<UserModel> VerifyPersonalKey(string Key);
-
+        Task<IEnumerable<ChatUserModel>> FindAllByContact(int contactUserId);
     }
 }

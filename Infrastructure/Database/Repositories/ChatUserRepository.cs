@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MessengerDesktop.Infrastructure.Database.Repositories
 {
-    public class ChatUserRepository : IRepository<ChatUserModel>
+    public class ChatUserRepository : IChatUserRepository
     {
         public async Task Add(ChatUserModel ChatUser)
         {
@@ -36,6 +36,18 @@ namespace MessengerDesktop.Infrastructure.Database.Repositories
             {
                 context.ChatUsers.Update(ChatUser);
                 await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<ChatUserModel>> FindAllByContact(int contactUserId)
+        {
+            using (var context = new AppDbContext())
+            {
+                return await context.ChatUsers
+                    .Include(u => u.User)
+                    .Include(m => m.Messages)
+                    .Where(entity => entity.ContactUserId == contactUserId)
+                    .ToListAsync();
             }
         }
 
